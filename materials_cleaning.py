@@ -47,8 +47,9 @@ class MaterialsCleaningOp(bpy.types.Operator):
                     ob.active_material_index = mat_slot_index
                     material = ob.material_slots[mat_slot_index].material
                     bpy.ops.object.material_slot_remove()
-                    if material.users == 0:
-                        material.use_fake_user = self.use_fake_user
+                    if material:
+                        if material.users == 0:
+                            material.use_fake_user = self.use_fake_user
                     break
 
         return {'FINISHED'}
